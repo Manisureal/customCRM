@@ -1,2 +1,10 @@
-<h1>Leads#index</h1>
-<p>Find me in app/views/leads/index.html.erb</p>
+<% @leads.each do |l| %>
+  <div>
+    <p>Name: <%= l.name %></p>
+    <p>Email: <%= l.email %></p>
+    <p>Message: <%= l.message %>  </p>
+  </div>
+<% end %>
+
+<%= link_to "Search New Lead", new_lead_path, class: "btn btn-success" %>
+
