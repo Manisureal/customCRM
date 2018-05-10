@@ -3,7 +3,7 @@ class Lead < ApplicationRecord
   require 'gmail'
 
   def parsed_mail
-    gmail = Gmail.connect()
+    gmail = Gmail.connect(ENV["GOOGLE_CLIENT_ID"],ENV["GOOGLE_CLIENT_SECRET"])
     gmail_mail = gmail.inbox.emails(:from => "manisureal@gmail.com").last
     arr = gmail_mail.body.raw_source.split("\r\n")
     6.times do arr.shift end

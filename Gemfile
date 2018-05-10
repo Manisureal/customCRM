@@ -10,6 +10,7 @@ gem 'rails', '5.2.0'
 gem 'redis'
 gem 'gmail'
 gem 'rename'
+gem 'figaro'
 
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass', '~> 3.3'
