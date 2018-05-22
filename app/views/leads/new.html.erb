@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+      <div class="form pad-bot">
+        <h1 class="text-center">Create a new Lead</h1>
+        <%= simple_form_for @new_lead do |f| %>
+          <%= f.input :name %>
+          <%= f.input :company %>
+          <%= f.input :email %>
+          <%= f.input :phone %>
+          <%= f.input :message %>
+          <%= f.input :status, as: :select, collection: [ "Open - Not Contacted", "Working - Contacted", "Closed - Converted", "Closed - Not Connected"] %>
+          <%= f.submit "Create Lead", class: "btn btn-success" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  .pad-bot {
+    padding-bottom: 25px;
+  }
+</style>
