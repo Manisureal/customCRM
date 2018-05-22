@@ -10,7 +10,14 @@ class Lead < ApplicationRecord
     31.times do arr.pop end
     arr.delete("<p>")
     arr.delete("</p>")
-    arr
+    # arr
+    new_arr = []
+    arr.each do |a|
+      split = a.split
+      split.delete_at(0)
+      new_arr << split.join(' ')
+    end
+    new_arr
     # @lead = Lead.new(name: arr[0], email: arr[1], message: arr[2])
     # @lead.save
   end
