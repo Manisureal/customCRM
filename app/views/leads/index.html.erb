@@ -10,15 +10,17 @@
   <h2>Latest Leads</h2>
   <div class="row">
   <% @leads.each do |l| %>
-    <div class="col-xs-12 col-sm-4">
-      <div class="lead-name">
-        <p>Name: <%= l.name %></p>
+    <%= link_to lead_path(l) do %>
+      <div class="col-xs-12 col-sm-4 scale">
+        <div class="lead-name">
+          <p>Name: <%= l.name %></p>
+        </div>
+        <div class="lead-body">
+          <p>Email: <%= l.email %></p>
+          <p>Message: <%= l.message %>  </p>
+        </div>
       </div>
-      <div class="lead-body">
-        <p>Email: <%= l.email %></p>
-        <p>Message: <%= l.message %>  </p>
-      </div>
-    </div>
+    <% end %>
   <% end %>
   </div>
   <%= link_to "Search New Lead", search_lead_path, class: "btn btn-success" %>
@@ -45,6 +47,10 @@
     color:#7f7d7d;
     border-radius:0px 0px 5px 5px;
     box-shadow: 3px 4px 18px -2px rgba(0,0,0,0.69);
+  }
+
+  .scale:hover {
+    transform: scale(1.1);
   }
 
   .lead-name {
