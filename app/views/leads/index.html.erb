@@ -11,10 +11,10 @@
   <div class="row">
   <% @leads.each do |l| %>
     <div class="col-xs-12 col-sm-4">
-      <div id="lead-name">
+      <div class="lead-name">
         <p>Name: <%= l.name %></p>
       </div>
-      <div id="lead-body">
+      <div class="lead-body">
         <p>Email: <%= l.email %></p>
         <p>Message: <%= l.message %>  </p>
       </div>
@@ -24,11 +24,18 @@
   <%= link_to "Search New Lead", new_lead_path, class: "btn btn-success" %>
 </div>
 
-
+<script>
+  window.onload = function() {
+  $('.lead-name').hide();
+  $('.lead-body').hide();
+    $('.lead-name').fadeIn(1250, "swing", function(){});
+    $('.lead-body').fadeIn(1250, "linear", function(){});
+  }
+</script>
 
 
 <style>
-  #lead-body {
+  .lead-body {
     background:#FFFAFA;
     padding:5px;
     margin-left:5px;
@@ -38,7 +45,7 @@
     border-radius:0px 0px 5px 5px;
   }
 
-  #lead-name {
+  .lead-name {
     background-color:#0198EB;
     padding:5px;
     margin-left:5px;
