@@ -3,7 +3,7 @@ class LeadsController < ApplicationController
     @leads = Lead.all
   end
 
-  def new
+  def search_lead
     @new_lead = Lead.new
     @new_lead.name = @new_lead.parsed_mail[0]
     @new_lead.email = @new_lead.parsed_mail[1]
