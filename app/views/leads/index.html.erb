@@ -29,6 +29,8 @@
     <%= link_to "Search New Lead", search_lead_path, class: "btn btn-success" %>
     <%= link_to "Create a New Lead", new_lead_path, class: "btn btn-warning" %>
   </div>
+  <%= paginate @leads, window: 2 %>&nbsp;&nbsp;
+  <%= page_entries_info @leads %>
 </div>
 
 <script>
