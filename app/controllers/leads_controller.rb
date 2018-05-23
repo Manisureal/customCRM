@@ -1,6 +1,7 @@
 class LeadsController < ApplicationController
   def index
-    @leads = Lead.all
+    # @leads = Lead.all
+    @leads = Lead.page(params[:page]).per(9)
   end
 
   def show
