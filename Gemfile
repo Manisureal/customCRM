@@ -12,6 +12,8 @@ gem 'gmail'
 gem 'rename'
 gem 'figaro'
 
+gem 'coffee-rails', '~> 4.1', '>= 4.2.2'
+gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass', '~> 3.3'
 gem 'font-awesome-sass', '~> 4.7'
