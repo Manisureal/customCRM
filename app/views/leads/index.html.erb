@@ -1,13 +1,13 @@
 <div class="container">
   <div class="row text-center">
     <div class="col-xs-12">
-      <h1>Welcome to Caremeds CRM</h1>
+      <h1 class="d-grey">Welcome to Caremeds CRM</h1>
     </div>
   </div>
 </div>
 
 <div class="container">
-  <h2>Latest Leads</h2>
+  <h2 class="d-grey">Latest Leads</h2>
   <div class="row">
   <% @leads.each do |l| %>
     <a href="javascript:void()" onclick="$.ajax('<%= lead_path(l)%>.js')">
@@ -25,8 +25,10 @@
     <%# end %>
   <% end %>
   </div>
-  <%= link_to "Search New Lead", search_lead_path, class: "btn btn-success" %>
-  <%= link_to "Create a New Lead", new_lead_path, class: "btn btn-warning" %>
+  <div class="pad-bottom">
+    <%= link_to "Search New Lead", search_lead_path, class: "btn btn-success" %>
+    <%= link_to "Create a New Lead", new_lead_path, class: "btn btn-warning" %>
+  </div>
 </div>
 
 <script>
@@ -55,6 +57,10 @@
     transform: scale(1.1);
   }
 
+  .d-grey {
+    color:#686868;
+  }
+
   .lead-name {
     background-color:#0198EB;
     padding:5px;
@@ -62,5 +68,9 @@
     color:white;
     border-radius:5px 5px 0px 0px;
     box-shadow: 3px 4px 18px -2px rgba(0,0,0,0.69);
+  }
+
+  .pad-bottom {
+    padding-bottom: 25px;
   }
 </style>
