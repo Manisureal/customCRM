@@ -1,7 +1,7 @@
 class LeadsController < ApplicationController
   def index
     # @leads = Lead.all
-    @leads = Lead.page(params[:page]).per(9)
+    @leads = Lead.order(:id).page(params[:page]).per(9)
   end
 
   def show
@@ -20,6 +20,17 @@ class LeadsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def edit
+    @lead = Lead.find(params[:id])
+  end
+
+  def update
+    @lead = Lead.find(params[:id])
+    @lead.update(lead_params)
+    redirect_to leads_path
+    flash[:notice] = "Lead# #{@lead.id} was successfully updated"
   end
 
   def search_lead
