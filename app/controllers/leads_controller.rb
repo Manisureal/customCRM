@@ -29,8 +29,7 @@ class LeadsController < ApplicationController
   def update
     @lead = Lead.find(params[:id])
     @lead.update(lead_params)
-    redirect_to leads_path
-    flash[:notice] = "Lead# #{@lead.id} was successfully updated"
+    flash.now[:notice] = "Lead# #{@lead.id} was successfully updated"
   end
 
   def search_lead
