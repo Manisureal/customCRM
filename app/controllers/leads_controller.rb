@@ -37,8 +37,13 @@ class LeadsController < ApplicationController
     @new_lead.name = @new_lead.parsed_mail[0]
     @new_lead.email = @new_lead.parsed_mail[1]
     @new_lead.message = @new_lead.parsed_mail[2]
-    @new_lead.save if @new_lead.new_record?
-    redirect_to leads_path
+    if @new_lead.save #@new_lead.new_record?
+      redirect_to leads_path
+      flash[:notice] = "Lead# #{@new_lead.id} was successfully retrieved"
+    else
+      redirect_to leads_path
+      flash[:alert] = "No new lead currently"
+    end
   end
 
   private
