@@ -1,7 +1,7 @@
 class LeadsController < ApplicationController
   def index
     # @leads = Lead.all
-    @leads = Lead.order(created_at: :desc).page(params[:page]).per(9)
+    @leads = Lead.order(:id).page(params[:page]).per(9)
   end
 
   def show
