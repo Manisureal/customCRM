@@ -8,3 +8,9 @@ bootbox.dialog
         className: 'btn-danger'
     }
   }
+
+$('.bootbox-close-button').click ->
+  #location.reload()
+  #window.location = window.location
+  window.location.reload()
+  return

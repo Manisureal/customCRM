@@ -6,6 +6,8 @@ class LeadsController < ApplicationController
 
   def show
     @lead = Lead.find(params[:id])
+    @lead.viewed = true
+    @lead.save
   end
 
   def new
