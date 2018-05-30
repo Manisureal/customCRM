@@ -52,6 +52,9 @@ class LeadsController < ApplicationController
     end
   end
 
+  def please_wait
+  end
+
   private
   def lead_params
     params.require(:lead).permit(:name, :company, :email, :phone, :message, :status)

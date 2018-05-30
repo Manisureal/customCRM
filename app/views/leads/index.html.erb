@@ -26,7 +26,7 @@
   <% end %>
   </div>
   <div class="pad-bottom">
-    <%= link_to "Search New Lead", search_lead_path, class: "btn btn-success" %>
+    <%= link_to "Search New Lead", search_lead_path, class: "btn btn-success", id: "search-lead" %>
     <%= link_to "Create a New Lead", new_lead_path, class: "btn btn-warning" %>
   </div>
   <div class="pad-bottom">
@@ -43,6 +43,10 @@
   $('.lead-body').hide();
     $('.lead-name').fadeIn(1250, "swing", function(){});
     $('.lead-body').fadeIn(1250, "linear", function(){});
+
+  $('#search-lead').click(function(e) {
+    $.ajax('<%= please_wait_path %>.js')
+  });
   }
 </script>
 
