@@ -31,7 +31,12 @@
         </div>
           <%= f.input :message, label: false, input_html: { class: 'special m' }%>
         <p><b>Status:</b> <%= @lead.status %></p>
-        <p><%= f.submit "Update Details", class: "btn btn-success" %></p>
+        <div class="flex">
+          <p><%= f.submit "Update Details", class: "btn btn-success" %></p>
+          <%= link_to lead_path(@lead), method: :delete, data: {confirm: 'Are you sure?', title: "Deleting Lead# #{@lead.id}"} do %>
+            <i class="far fa-trash-alt"></i>
+          <% end %>
+        </div>
         <hr>
         <p><b>Change Status:</b> <%= f.input :status, label: false, as: :select, collection: ["Open - Not Contacted", "Working - Contacted", "Closed - Converted", "Closed - Not Connected"] %></p>
         <p><%= f.submit "Update Status", class: 'btn btn-info' %></p>
@@ -56,6 +61,7 @@
       })
     })
   })
+
   // $('#name').on("click",function(){
   //   $('#name').toggle(500);
   // })
@@ -63,6 +69,16 @@
 
 
 <style>
+  .fa-trash-alt {
+    color:#EE2E34;
+    opacity:0.75;
+  }
+
+  .fa-trash-alt:hover {
+    color:#EE2E34;
+    opacity:1;
+  }
+
   .flex {
     display: flex;
     justify-content:space-between;
