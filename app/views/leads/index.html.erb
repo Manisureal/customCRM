@@ -10,8 +10,8 @@
   <h2 class="d-grey">Latest Leads</h2>
   <div class="row">
   <% @leads.each do |l| %>
-    <a href="javascript:void()" onclick="$.ajax('<%= lead_path(l)%>.js')">
-      <%#= link_to lead_path(l) do %>
+    <!-- <a href="javascript:void()" onclick="$.ajax('<%= lead_path(l)%>.js')"> -->
+      <%= link_to lead_path(l) do %>
       <div class="col-xs-12 col-sm-4 scale">
         <div class="lead-name">
           <p>Name: <%= l.name %></p>
@@ -24,8 +24,8 @@
           <p>Message: <%= l.message %>  </p>
         </div>
       </div>
-      </a>
-    <%# end %>
+      <!-- </a> -->
+    <% end %>
   <% end %>
   </div>
   <div class="pad-bottom">
