@@ -29,8 +29,11 @@ ActiveRecord::Schema.define(version: 2018_05_31_083522) do
 
   create_table "notes", force: :cascade do |t|
     t.text "content"
+    t.bigint "lead_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["lead_id"], name: "index_notes_on_lead_id"
   end
 
+  add_foreign_key "notes", "leads"
 end

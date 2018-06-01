@@ -4,43 +4,50 @@
       <div class="lead-show">
         <!-- <h1 class="text-center"><b></b>Lead# <%#= @lead.id %></h1> -->
         <%= simple_form_for @lead, remote: true do |f| %>
-        <%= render 'shared/flashes' %>
-        <div class="flex">
-          <p><b>Name:</b> <%= @lead.name %></p>
-          <a><i id="name" class="fas fa-pencil-alt fa-spin"></i></a>
-        </div>
-          <%= f.input :name, label: false, input_html: { class: 'special n' }%>
-        <div class="flex">
-          <p><b>Company:</b> <%= @lead.company %></p>
-          <a><i id="company" class="fas fa-pencil-alt fa-spin"></i></a>
-        </div>
-          <%= f.input :company, label: false, input_html: { class: 'special c' }%>
-        <div class="flex">
-          <p><b>Email:</b> <%= @lead.email %></p>
-          <a><i id="email" class="fas fa-pencil-alt fa-spin"></i></a>
-        </div>
-          <%= f.input :email, label: false, input_html: { class: 'special e' }%>
-        <div class="flex">
-          <p><b>Phone:</b> <%= @lead.phone %></p>
-          <a><i id="phone" class="fas fa-pencil-alt fa-spin"></i></a>
-        </div>
-          <%= f.input :phone, label: false, input_html: { class: 'special p' }%>
-        <div class="flex">
-          <p><b>Message:</b> <%= @lead.message %></p>
-          <a><i id="message" class="fas fa-pencil-alt fa-spin"></i></a>
-        </div>
-          <%= f.input :message, label: false, input_html: { class: 'special m' }%>
-        <p><b>Status:</b> <%= @lead.status %></p>
-        <div class="flex">
-          <p><%= f.submit "Update Details", class: "btn btn-success" %></p>
-          <%= link_to lead_path(@lead), method: :delete, data: {confirm: 'Are you sure?', title: "Deleting Lead# #{@lead.id}"} do %>
-            <i class="far fa-trash-alt"></i>
+          <%= render 'shared/flashes' %>
+          <div class="flex">
+            <p><b>Name:</b> <%= @lead.name %></p>
+            <a><i id="name" class="fas fa-pencil-alt fa-spin"></i></a>
+          </div>
+            <%= f.input :name, label: false, input_html: { class: 'special n' }%>
+          <div class="flex">
+            <p><b>Company:</b> <%= @lead.company %></p>
+            <a><i id="company" class="fas fa-pencil-alt fa-spin"></i></a>
+          </div>
+            <%= f.input :company, label: false, input_html: { class: 'special c' }%>
+          <div class="flex">
+            <p><b>Email:</b> <%= @lead.email %></p>
+            <a><i id="email" class="fas fa-pencil-alt fa-spin"></i></a>
+          </div>
+            <%= f.input :email, label: false, input_html: { class: 'special e' }%>
+          <div class="flex">
+            <p><b>Phone:</b> <%= @lead.phone %></p>
+            <a><i id="phone" class="fas fa-pencil-alt fa-spin"></i></a>
+          </div>
+            <%= f.input :phone, label: false, input_html: { class: 'special p' }%>
+          <div class="flex">
+            <p><b>Message:</b> <%= @lead.message %></p>
+            <a><i id="message" class="fas fa-pencil-alt fa-spin"></i></a>
+          </div>
+            <%= f.input :message, label: false, input_html: { class: 'special m' }%>
+          <p><b>Status:</b> <%= @lead.status %></p>
+          <div class="flex">
+            <p><%= f.submit "Update Details", class: "btn btn-success update-details" %></p>
+            <%= link_to lead_path(@lead), method: :delete, data: {confirm: 'Are you sure?', title: "Deleting Lead# #{@lead.id}"} do %>
+              <i class="far fa-trash-alt"></i>
+            <% end %>
+          </div>
+          <hr>
+          <p><b>Change Status:</b> <%= f.input :status, label: false, as: :select, collection: ["Open - Not Contacted", "Working - Contacted", "Closed - Converted", "Closed - Not Connected"] %></p>
+          <p><%= f.submit "Update Status", class: 'btn btn-info' %></p>
+          <br>
+          <%= f.simple_fields_for :notes, @lead.notes.build do |n| %>
+            <%= n.input :content, label: "Notes", placeholder: "Add Your Notes Here...", as: :text, input_html: { rows: 2, style: 'width: 100%'} %>
+            <%# n.hidden_field :lead_id %>
+            <%= n.submit "Add Notes", class: 'btn btn-success' %>
           <% end %>
-        </div>
-        <hr>
-        <p><b>Change Status:</b> <%= f.input :status, label: false, as: :select, collection: ["Open - Not Contacted", "Working - Contacted", "Closed - Converted", "Closed - Not Connected"] %></p>
-        <p><%= f.submit "Update Status", class: 'btn btn-info' %></p>
         <% end %>
+        <br>
         <p><%= link_to "Back", leads_path, class: 'btn btn-primary' %></p>
       </div>
 <!--     </div>
@@ -50,7 +57,7 @@
 <script>
   window.onload = function() {
     $('.special').hide();
-    $('.btn-success').hide();
+    $('.update-details').hide();
     var leadShowIds = ["#name", "#company", "#email", "#phone", "#message"];
     var leadEditClasses = [".n", ".c", ".e", ".p", ".m"];
     leadShowIds.forEach(function(value, indexOfIds) {
