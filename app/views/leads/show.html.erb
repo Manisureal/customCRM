@@ -37,17 +37,31 @@
               <i class="far fa-trash-alt"></i>
             <% end %>
           </div>
+
           <hr>
           <p><b>Change Status:</b> <%= f.input :status, label: false, as: :select, collection: ["Open - Not Contacted", "Working - Contacted", "Closed - Converted", "Closed - Not Connected"] %></p>
           <p><%= f.submit "Update Status", class: 'btn btn-info' %></p>
-          <br>
-          <%= f.simple_fields_for :notes, @lead.notes.build do |n| %>
-            <%= n.input :content, label: "Notes", placeholder: "Add Your Notes Here...", as: :text, input_html: { rows: 2, style: 'width: 100%'} %>
-            <%# n.hidden_field :lead_id %>
-            <%= n.submit "Add Notes", class: 'btn btn-success' %>
+          <hr>
+
+          <p id="note">Notes:</p>
+          <span class="btn btn-grey create-note"><i class="fas fa-plus-circle"></i></span>
+          <span class="btn btn-grey view-note"><i class="fas fa-clipboard-list"></i></span>
+          <div id="note-textbox">
+            <%= f.simple_fields_for :notes, @lead.notes.build do |n| %>
+              <%= n.input :content, label: false, placeholder: "Add Your Notes Here...", as: :text, input_html: { rows: 2, style: 'width: 100%'} %>
+              <%# n.hidden_field :lead_id %>
+              <%= n.submit "Add Notes", class: 'btn btn-success' %>
+            <% end %>
+          </div>
+          <% if @lead.notes.exists? %>
+          <% @lead.notes.each do |ln| %>
+            <p class="notes"><%= ln.content %></p>
+          <% end %>
+          <% else %>
+            <p class="notes"> No Notes Currently! </p>
           <% end %>
         <% end %>
-        <br>
+        <hr>
         <p><%= link_to "Back", leads_path, class: 'btn btn-primary' %></p>
       </div>
 <!--     </div>
@@ -65,13 +79,29 @@
         leadEditClasses.forEach(function(val, indexOfClasses) {
           if (indexOfIds == indexOfClasses) {
             $(val).toggle(450);
-            $('.btn-success').toggle(550);
+            $('.update-details').toggle(550);
           }
         })
       })
     })
-  $('.btn-success').click(function(){
+  $('.update-details').click(function(){
     window.location.reload();
+  })
+  $('.notes').each(function(val,i) {
+    if (i.innerHTML == "") {
+      this.remove()
+    }
+  })
+  $('.notes').hide();
+  $('.view-note').click(function(e){
+    e.preventDefault();
+    $('.notes').toggle();
+  })
+  $('#note-textbox').hide();
+  $('.create-note').click(function(e){
+    e.preventDefault();
+    $('#note-textbox').toggle();
+    $('html, body').animate({scrollTop:$(document).height()}, 'slow');
   })
   }
 
@@ -82,6 +112,42 @@
 
 
 <style>
+  .btn-grey {
+    color: #fff;
+    background-color: #808080;
+    border-color: #696969;
+  }
+
+  .create-note {
+    margin-top: 10px;
+  }
+
+  .view-note {
+    margin-top: 10px;
+  }
+
+  #note-textbox {
+    margin-top: 30px;
+  }
+
+  #note {
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: bold;
+    /*font-size: 18px;*/
+  }
+
+  .notes {
+    background-color:#F5F5F5;
+    /*color:white;*/
+    padding:10px;
+    margin:10px;
+  }
+
+  .notes:nth-child(even) {
+      background-color: #E8E8E8;
+  }
+
   .fa-trash-alt {
     color:#EE2E34;
     opacity:0.75;
