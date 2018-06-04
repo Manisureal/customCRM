@@ -55,7 +55,10 @@
           </div>
           <% if @lead.notes.exists? %>
           <% @lead.notes.each do |ln| %>
-            <p class="notes"><%= ln.content %></p>
+            <div class="flex notes">
+              <p><%= ln.content %></p>
+              <p><%= ln.created_at == nil ? nil : ln.created_at.strftime("%A, %b %d %y") %></p>
+            </div>
           <% end %>
           <% else %>
             <p class="notes"> No Notes Currently! </p>
@@ -88,8 +91,8 @@
     window.location.reload();
   })
   $('.notes').each(function(val,i) {
-    if (i.innerHTML == "") {
-      this.remove()
+    if (i.innerText == "") {
+      this.remove();
     }
   })
   $('.notes').hide();
@@ -146,6 +149,10 @@
 
   .notes:nth-child(even) {
       background-color: #E8E8E8;
+  }
+
+  .notes p {
+    margin:0;
   }
 
   .fa-trash-alt {
