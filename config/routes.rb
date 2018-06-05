@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   get 'please_wait', to: 'leads#please_wait'
   resources :leads, only: [:index, :show, :edit, :update, :new, :create]
   resources :notes, only: [:index, :new, :create]
-  resources :contacts, only: [:index, :show]
+  resources :contacts, only: [:index, :show, :new, :create]
 end
