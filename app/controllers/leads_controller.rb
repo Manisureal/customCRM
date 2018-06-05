@@ -30,16 +30,18 @@ class LeadsController < ApplicationController
 
   def update
     @lead = Lead.find(params[:id])
-    if @lead.update(lead_params)
+    @lead.update(lead_params)
+    if @lead.status == "Closed - Converted" || @lead.status == "Working - Contacted"
+      @contact = Contact.new(name: @lead.name, company: @lead.company, email: @lead.email, phone: @lead.phone, lead_id: @lead.id)
+      @contact.errors.messages
+      if @contact.save
+        redirect_to request.referrer
+        flash[:notice] = "Lead# #{@lead.id} was converted into a contact"
+      end
+      # @lead.update(status_update)
+    else
       redirect_to request.referrer
       flash[:notice] = "Lead# #{@lead.id} was successfully updated"
-    elsif @lead.status === "Working - Contacted" || "Closed - Converted"
-      @contact = Contact.new(name: @lead.name, company: @lead.company, email: @lead.email, phone: @lead.phone, lead_id: @lead.id)
-      if @contact.save
-        @contact.errors.messages
-        # redirect_to request.referrer
-        flash[:notice] = "Lead was converted into a contact"
-      end
     end
   end
 
@@ -69,5 +71,9 @@ class LeadsController < ApplicationController
   private
   def lead_params
     params.require(:lead).permit(:name, :company, :email, :phone, :message, :status, notes_attributes: [:content])
+  end
+
+  def status_update
+    params.require(:lead).permit(:status)
   end
 end
