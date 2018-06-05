@@ -30,8 +30,17 @@ class LeadsController < ApplicationController
 
   def update
     @lead = Lead.find(params[:id])
-    @lead.update(lead_params)
-    flash.now[:notice] = "Lead# #{@lead.id} was successfully updated"
+    if @lead.update(lead_params)
+      redirect_to request.referrer
+      flash[:notice] = "Lead# #{@lead.id} was successfully updated"
+    elsif @lead.status === "Working - Contacted" || "Closed - Converted"
+      @contact = Contact.new(name: @lead.name, company: @lead.company, email: @lead.email, phone: @lead.phone, lead_id: @lead.id)
+      if @contact.save
+        @contact.errors.messages
+        # redirect_to request.referrer
+        flash[:notice] = "Lead was converted into a contact"
+      end
+    end
   end
 
   def destroy

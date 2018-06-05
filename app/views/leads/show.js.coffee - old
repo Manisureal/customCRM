@@ -1,0 +1,16 @@
+#bootbox.dialog
+  #size: "large"
+  #title: '<span style="color:#686868">Lead# <%=@lead.id%></span>'
+  #message: '<%= escape_javascript(render partial: "show") %>'
+  #buttons: {
+    #cancel: {
+        #label: "Close",
+        #className: 'btn-danger'
+    #}
+ #}
+
+$('.bootbox-close-button').click ->
+  #location.reload()
+  #window.location = window.location
+  window.location.reload()
+  return
