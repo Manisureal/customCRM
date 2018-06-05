@@ -1,0 +1,139 @@
+<div class="lead-show">
+  <!-- <h1 class="text-center"><b></b>Lead# <%#= @lead.id %></h1> -->
+  <%= simple_form_for @contact do |f| %>
+    <%#= render 'shared/flashes' %>
+    <div class="flex">
+      <p><b>Name:</b> <%= @contact.name %></p>
+      <a><i id="name" class="fas fa-pencil-alt fa-spin"></i></a>
+    </div>
+      <%= f.input :name, label: false, input_html: { class: 'special n' }%>
+    <div class="flex">
+      <p><b>Company:</b> <%= @contact.company %></p>
+      <a><i id="company" class="fas fa-pencil-alt fa-spin"></i></a>
+    </div>
+      <%= f.input :company, label: false, input_html: { class: 'special c' }%>
+    <div class="flex">
+      <p><b>Email:</b> <%= @contact.email %></p>
+      <a><i id="email" class="fas fa-pencil-alt fa-spin"></i></a>
+    </div>
+      <%= f.input :email, label: false, input_html: { class: 'special e' }%>
+    <div class="flex">
+      <p><b>Phone:</b> <%= @contact.phone %></p>
+      <a><i id="phone" class="fas fa-pencil-alt fa-spin"></i></a>
+    </div>
+      <%= f.input :phone, label: false, input_html: { class: 'special p' }%>
+    <div class="flex">
+      <p><b>Address:</b> <%= @contact.address %></p>
+      <a><i id="address" class="fas fa-pencil-alt fa-spin"></i></a>
+    </div>
+      <%= f.input :address, label: false, input_html: { class: 'special a' }%>
+    <div class="flex">
+      <p><b>City:</b> <%= @contact.city %></p>
+      <a><i id="city" class="fas fa-pencil-alt fa-spin"></i></a>
+    </div>
+      <%= f.input :city, label: false, input_html: { class: 'special ci' }%>
+    <div class="flex">
+      <p><b>Postcode:</b> <%= @contact.postcode %></p>
+      <a><i id="postcode" class="fas fa-pencil-alt fa-spin"></i></a>
+    </div>
+      <%= f.input :postcode, label: false, input_html: { class: 'special po' }%>
+    <div class="text-right">
+
+      <%#= link_to lead_path(@lead), method: :delete, data: {confirm: 'Are you sure?', title: "Deleting Lead# #{@lead.id}"} do %>
+        <i class="far fa-trash-alt"></i>
+      <%# end %>
+    </div>
+  <% end %>
+</div>
+
+
+<script>
+  window.onload = function() {
+    $('.special').hide();
+    $('.update-details').hide();
+    var leadShowIds = ["#name", "#company", "#email", "#phone", "#message", "#address", "#city", "#postcode"];
+    var leadEditClasses = [".n", ".c", ".e", ".p", ".m", ".a", ".ci", ".po"];
+    leadShowIds.forEach(function(value, indexOfIds) {
+      $(value).click(function(){
+        leadEditClasses.forEach(function(val, indexOfClasses) {
+          if (indexOfIds == indexOfClasses) {
+            $(val).toggle(450);
+            $('.update-details').toggle(550);
+          }
+        })
+      })
+    })
+  }
+
+  // $('#name').on("click",function(){
+  //   $('#name').toggle(500);
+  // })
+</script>
+
+
+<style>
+  .btn-grey {
+    color: #fff;
+    background-color: #808080;
+    border-color: #696969;
+  }
+
+  .create-note {
+    margin-top: 10px;
+  }
+
+  .view-note {
+    margin-top: 10px;
+  }
+
+  #note-textbox {
+    margin-top: 30px;
+  }
+
+  #note {
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: bold;
+    /*font-size: 18px;*/
+  }
+
+  .notes {
+    background-color:#F5F5F5;
+    /*color:white;*/
+    padding:10px;
+    margin:10px;
+  }
+
+  .notes:nth-child(even) {
+      background-color: #E8E8E8;
+  }
+
+  .notes p {
+    margin:0;
+  }
+
+  .fa-trash-alt {
+    color:#EE2E34;
+    opacity:0.75;
+  }
+
+  .fa-trash-alt:hover {
+    color:#EE2E34;
+    opacity:1;
+  }
+
+  .flex {
+    display: flex;
+    justify-content:space-between;
+  }
+
+  .lead-show {
+    border-radius:5px;
+    /*background: #F5F5F5;*/
+    background: #f9f9f9;
+    padding:20px 15px;
+    /*margin-top: 15px;*/
+    box-shadow: 11px 15px 32px -12px rgba(0,0,0,0.75);
+    color:#7F7D7D;
+  }
+</style>
