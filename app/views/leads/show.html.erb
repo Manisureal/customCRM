@@ -3,8 +3,8 @@
     <div class=""> -->
       <div class="lead-show">
         <!-- <h1 class="text-center"><b></b>Lead# <%#= @lead.id %></h1> -->
-        <%= simple_form_for @lead, remote: true do |f| %>
-          <%= render 'shared/flashes' %>
+        <%= simple_form_for @lead do |f| %>
+          <%#= render 'shared/flashes' %>
           <div class="flex">
             <p><b>Name:</b> <%= @lead.name %></p>
             <a><i id="name" class="fas fa-pencil-alt fa-spin"></i></a>
