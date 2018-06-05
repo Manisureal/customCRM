@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <h1 class="d-grey">Welcome to Caremeds CRM</h1>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <h2 class="d-grey">All Contacts</h2>
+  <div class="row">
+  <% @contacts.each do |c| %>
+      <%= link_to contact_path(c) do %>
+      <div class="col-xs-12 col-sm-4 scale">
+        <div class="lead-name">
+          <p>Name: <%= c.name %></p>
+        <%# if l.viewed == false %>
+          <!-- <div class="badge">new</div> -->
+        <%# end %>
+        </div>
+        <div class="lead-body">
+          <p>Email: <%= c.email %></p>
+          <p>Company: <%= c.company %></p>
+        </div>
+      </div>
+      <!-- </a> -->
+    <% end %>
+  <% end %>
+  </div>
+  <div class="pad-bottom">
+    <%= link_to "Create a Contact", new_lead_path, class: "btn btn-warning" %>
+  </div>
+  <div class="pad-bottom">
+    <%#= paginate @leads, window: 2 %>
+    <div class="text-right">
+      <%#= page_entries_info @leads %>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  .badge {
+    /*display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 50%;*/
+    position: absolute;
+    right:6px;
+    top:-8px;
+    background:red;
+    text-align: center;
+    color:white;
+    padding:5px 10px;
+    font-size:20px;
+  }
+
+  .pagination {
+    display: block;
+    margin:0;
+  }
+
+  .lead-body {
+    background:#FFFAFA;
+    padding:5px;
+    margin-left:5px;
+    margin-bottom:15px;
+    height:150px;
+    color:#7f7d7d;
+    border-radius:0px 0px 5px 5px;
+    box-shadow: 3px 4px 18px -2px rgba(0,0,0,0.69);
+  }
+
+  .scale:hover {
+    transform: scale(1.1);
+  }
+
+  .d-grey {
+    color:#686868;
+  }
+
+  .lead-name {
+    display: flex;
+    justify-content: space-between;
+    background-color:#0198EB;
+    padding:5px;
+    margin-left:5px;
+    color:white;
+    border-radius:5px 5px 0px 0px;
+    box-shadow: 3px 4px 18px -2px rgba(0,0,0,0.69);
+  }
+
+  .pad-bottom {
+    padding-bottom: 25px;
+  }
+</style>
