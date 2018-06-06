@@ -31,9 +31,9 @@
     <%= link_to "Create a Contact", new_contact_path, class: "btn btn-warning" %>
   </div>
   <div class="pad-bottom">
-    <%#= paginate @leads, window: 2 %>
+    <%= paginate @contacts, window: 2 %>
     <div class="text-right">
-      <%#= page_entries_info @leads %>
+      <%= page_entries_info @contacts %>
     </div>
   </div>
 </div>
