@@ -39,10 +39,11 @@
       <%= f.input :postcode, label: false, input_html: { class: 'special po' }%>
     <div class="text-right">
 
-      <%#= link_to lead_path(@lead), method: :delete, data: {confirm: 'Are you sure?', title: "Deleting Lead# #{@lead.id}"} do %>
+      <%= link_to contact_path(@contact), method: :delete, data: {confirm: 'Are you sure?', title: "Deleting Contact# #{@contact.id}"} do %>
         <i class="far fa-trash-alt"></i>
-      <%# end %>
+      <% end %>
     </div>
+    <%= f.submit "Update Details", class: "btn btn-warning" %>
   <% end %>
 </div>
 
