@@ -12,13 +12,13 @@
   <% @contacts.each do |c| %>
       <%= link_to contact_path(c) do %>
       <div class="col-xs-12 col-sm-4 scale">
-        <div class="lead-name">
+        <div class="contact-name">
           <p>Name: <%= c.name %></p>
         <%# if l.viewed == false %>
           <!-- <div class="badge">new</div> -->
         <%# end %>
         </div>
-        <div class="lead-body">
+        <div class="contact-body">
           <p>Email: <%= c.email %></p>
           <p>Company: <%= c.company %></p>
         </div>
@@ -60,7 +60,7 @@
     margin:0;
   }
 
-  .lead-body {
+  .contact-body {
     background:#FFFAFA;
     padding:5px;
     margin-left:5px;
@@ -79,7 +79,7 @@
     color:#686868;
   }
 
-  .lead-name {
+  .contact-name {
     display: flex;
     justify-content: space-between;
     background-color:#0198EB;
