@@ -1,7 +1,7 @@
 class Lead < ApplicationRecord
-  has_many :notes
+  has_many :notes, dependent: :destroy
   has_one :contact
-  accepts_nested_attributes_for :notes, reject_if: :all_blank #allow_destroy: true
+  accepts_nested_attributes_for :notes, reject_if: :all_blank# allow_destroy: true
   validates :email, uniqueness: true
   require 'gmail'
 
