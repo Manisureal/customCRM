@@ -39,7 +39,7 @@
           </div>
 
           <hr>
-          <p><b>Change Status:</b> <%= f.input :status, label: false, as: :select, collection: ["Open - Not Contacted", "Working - Contacted", "Closed - Converted", "Closed - Not Connected"] %></p>
+          <p><b>Change Status:</b> <%= f.input :status, label: false, as: :select, collection: ["Open - Not Contacted", "Working - Contacted", "Closed - Converted", "Closed - Not Connected"], input_html: { class: "selectpicker" } %></p>
           <p><%= f.submit "Update Status", class: 'btn btn-info' %></p>
           <hr>
 

@@ -47,9 +47,8 @@
     <hr>
     <%#= f.select(:product, options_for_select( [[ 'Pharmacy', ['Caremeds', 'eMAR', 'MultiMeds']], [ 'Carehome', ['Frau', 'Frau']]] ), { 'data-width' => "100%", :class =>
     "selectpicker"} ) %>
-    <% counter = 0 %>
-    <%= f.input :product,
 
+    <%= f.input :product,
      # :include_blank => false,
      :as => :grouped_select,
      :collection => [['Pharmacy', ['Caremeds', 'eMAR', 'MultiMeds']], ['Carehome', ['e-MAR', 'Multi-Meds']]],
