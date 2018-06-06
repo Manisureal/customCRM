@@ -45,6 +45,15 @@
     </div>
     <%= f.submit "Update Details", class: "btn btn-warning update-details" %>
     <hr>
+    <%#= f.select(:product, options_for_select( [[ 'Pharmacy', ['Caremeds', 'eMAR', 'MultiMeds']], [ 'Carehome', ['Frau', 'Frau']]] ), { 'data-width' => "100%", :class => "selectpicker"} ) %>
+    <%= f.input :product,
+     # :include_blank => false,
+     :as => :grouped_select,
+     :collection => Proc.new { [['Pharmacy', ['Caremeds', 'eMAR', 'MultiMeds']], ['Carehome', ['eMAR', 'MultiMeds']]] },
+     :group_method => :last,
+     :input_html => { class: 'selectpicker', multiple: true } %>
+     <%= f.submit "Add Product", class: "btn btn-success" %>
+     <hr>
     <%= link_to "Back", contacts_path, class: "btn btn-primary" %>
   <% end %>
 </div>
