@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2018_06_06_094300) do
     t.bigint "lead_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "product"
+    t.string "product", array: true
     t.index ["lead_id"], name: "index_contacts_on_lead_id"
   end
 

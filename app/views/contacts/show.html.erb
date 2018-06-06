@@ -37,20 +37,24 @@
       <a><i id="postcode" class="fas fa-pencil-alt fa-spin"></i></a>
     </div>
       <%= f.input :postcode, label: false, input_html: { class: 'special po' }%>
+      <%= f.label "Interest In Products:" %> <%= @contact.product != nil ? @contact.product.join(", ") : nil%>
     <div class="text-right">
-
       <%= link_to contact_path(@contact), method: :delete, data: {confirm: 'Are you sure?', title: "Deleting Contact# #{@contact.id}"} do %>
         <i class="far fa-trash-alt"></i>
       <% end %>
     </div>
     <%= f.submit "Update Details", class: "btn btn-warning update-details" %>
     <hr>
-    <%#= f.select(:product, options_for_select( [[ 'Pharmacy', ['Caremeds', 'eMAR', 'MultiMeds']], [ 'Carehome', ['Frau', 'Frau']]] ), { 'data-width' => "100%", :class => "selectpicker"} ) %>
+    <%#= f.select(:product, options_for_select( [[ 'Pharmacy', ['Caremeds', 'eMAR', 'MultiMeds']], [ 'Carehome', ['Frau', 'Frau']]] ), { 'data-width' => "100%", :class =>
+    "selectpicker"} ) %>
+    <% counter = 0 %>
     <%= f.input :product,
+
      # :include_blank => false,
      :as => :grouped_select,
-     :collection => Proc.new { [['Pharmacy', ['Caremeds', 'eMAR', 'MultiMeds']], ['Carehome', ['eMAR', 'MultiMeds']]] },
+     :collection => [['Pharmacy', ['Caremeds', 'eMAR', 'MultiMeds']], ['Carehome', ['e-MAR', 'Multi-Meds']]],
      :group_method => :last,
+     include_hidden: false,
      :input_html => { class: 'selectpicker', multiple: true } %>
      <%= f.submit "Add Product", class: "btn btn-success" %>
      <hr>
