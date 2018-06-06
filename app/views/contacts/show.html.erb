@@ -54,7 +54,7 @@
      :collection => [['Pharmacy', ['Caremeds', 'eMAR', 'MultiMeds']], ['Carehome', ['e-MAR', 'Multi-Meds']]],
      :group_method => :last,
      include_hidden: false,
-     :input_html => { class: 'selectpicker', multiple: true } %>
+     :input_html => { class: 'selectpicker', multiple: true, :'data-actions-box' => true } %>
      <%= f.submit "Add Product", class: "btn btn-success" %>
      <hr>
     <%= link_to "Back", contacts_path, class: "btn btn-primary" %>
