@@ -47,8 +47,10 @@ class LeadsController < ApplicationController
 
   def destroy
     @lead = Lead.find(params[:id])
-    @lead.destroy
-    # redirect_to leads_path
+    if @lead.destroy
+      redirect_to leads_path
+      flash[:notice] = "Lead##{@lead.id} successfully deleted!"
+    end
   end
 
   def search_lead
