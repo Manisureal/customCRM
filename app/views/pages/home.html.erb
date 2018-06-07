@@ -1,2 +1,39 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<!-- <h1>Pages#home</h1>
+<p>Find me in app/views/pages/home.html.erb</p> -->
+<div class="grid">
+  <div class="leads">
+    <% @leads.each_with_index do |l, i| %>
+    <%= l.name + "#{i}" %>
+    <%= l.email %>
+    <%= l.message %>
+    <br>
+    <% end %>
+  </div>
+  <div class="contacts">
+    <% @contacts.each do |c| %>
+    <%= c.name %>
+    <%= c.email %>
+    <% end %>
+  </div>
+  <div class="users"></div>
+</div>
+
+
+<style>
+  .grid {
+    display: grid;
+    border:1px black solid;
+    grid-template-columns: 400px 1fr 1fr 1fr;
+    grid-template-rows: 50% 25% 25%;
+  }
+
+  .leads {
+    grid-row: 1 / span 1;
+    grid-column: 1 / span 2;
+  }
+
+  .contacts {
+    grid-row: 1 / span 3;
+    grid-column: 3 / span 2;
+  }
+</style>
