@@ -1,111 +1,124 @@
 <div class="container">
-  <div class="row text-center">
-    <div class="col-xs-12">
-      <h1 class="d-grey">Welcome to Caremeds CRM</h1>
-    </div>
-  </div>
-</div>
-
-<div class="container">
-  <h2 class="d-grey">Latest Leads</h2>
   <div class="row">
-  <% @leads.each do |l| %>
-    <!-- <a href="javascript:void()" onclick="$.ajax('<%= lead_path(l)%>.js')"> -->
-      <%= link_to lead_path(l) do %>
-      <div class="col-xs-12 col-sm-4 scale">
-        <div class="lead-name">
-          <p>Name: <%= l.name %></p>
-        <% if l.viewed == false %>
-          <div class="badge">new</div>
-        <% end %>
+    <div class="col-xs-12">
+      <div class="bg-color">
+        <div class="lead-header">
+          <h5><b>Leads</b></h5>
+          <p><%= link_to "Create Lead", new_lead_path %></p>
         </div>
-        <div class="lead-body">
-          <p>Email: <%= l.email %></p>
-          <p>Message: <%= l.message %>  </p>
+      <% @leads.each do |l| %>
+        <div class="lead">
+          <div class="lead-name">
+            <h3><%= link_to l.name, l %></h3>
+            <p><%= l.created_at.strftime("%a, %b %d %y") %></p>
+          </div>
+          <div class="lead-body">
+            <p><b>Email: </b><%= l.email %></p>
+            <p> <b>Message: </b> <%= l.message %></p>
+          </div>
+          <div class="links">
+            <p><%= link_to "Edit", lead_path(l) %>| <%= link_to "Convert", lead_path(l) %>|
+              <%= link_to "Reject", lead_path(l), method: :delete, data: { confirm: "Are You Sure?"} %>|
+              <%= link_to "Delete!", lead_path(l), method: :delete, data: { confirm: "Are You Sure?"} %></p>
+          </div>
+          <!-- <div class="lead-status">
+            <p class="status pending"></p>
+            <p class="price"></p>
+          </div> -->
         </div>
+      <% end %>
       </div>
-      <!-- </a> -->
-    <% end %>
-  <% end %>
-  </div>
-  <div class="pad-bottom">
-    <%= link_to "Search New Lead", search_lead_path, class: "btn btn-success", id: "search-lead" %>
-    <%= link_to "Create a New Lead", new_lead_path, class: "btn btn-warning" %>
-  </div>
-  <div class="pad-bottom">
-    <%= paginate @leads, window: 2 %>
-    <div class="text-right">
-      <%= page_entries_info @leads %>
     </div>
   </div>
 </div>
 
-<script>
-  window.onload = function() {
-  $('.lead-name').hide();
-  $('.lead-body').hide();
-    $('.lead-name').fadeIn(1250, "swing", function(){});
-    $('.lead-body').fadeIn(1250, "linear", function(){});
-
-  $('#search-lead').click(function(e) {
-    $.ajax('<%= please_wait_path %>.js')
-  });
-  }
-</script>
 
 
 <style>
-  .badge {
-    /*display: flex;
-    justify-content: space-around;
-    align-items: center;
-    border-radius: 50%;*/
-    position: absolute;
-    right:6px;
-    top:-8px;
-    background:red;
-    text-align: center;
-    color:white;
-    padding:5px 10px;
-    font-size:20px;
-  }
-
-  .pagination {
-    display: block;
-    margin:0;
-  }
-
-  .lead-body {
-    background:#FFFAFA;
-    padding:5px;
-    margin-left:5px;
-    margin-bottom:15px;
-    height:150px;
-    color:#7f7d7d;
-    border-radius:0px 0px 5px 5px;
-    box-shadow: 3px 4px 18px -2px rgba(0,0,0,0.69);
-  }
-
-  .scale:hover {
-    transform: scale(1.1);
-  }
-
-  .d-grey {
-    color:#686868;
-  }
-
-  .lead-name {
+  .lead-header {
     display: flex;
     justify-content: space-between;
-    background-color:#0198EB;
-    padding:5px;
-    margin-left:5px;
-    color:white;
-    border-radius:5px 5px 0px 0px;
-    box-shadow: 3px 4px 18px -2px rgba(0,0,0,0.69);
+    align-items: center;
+    padding:10px;
+    border-bottom: 1px solid #A8A8A8;
+    margin: 0px 10px;
   }
 
-  .pad-bottom {
-    padding-bottom: 25px;
+  .lead-header h5 {
+    color:#888888;
+  }
+
+  .lead-header p {
+    font-size: 0.8em;
+
+  }
+
+  .bg-color {
+    background-color: white;
+    margin-top: 10px;
+  }
+
+  .lead {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(220,224,244,0.4);
+  margin:0;
+  }
+
+  .lead:last-child {
+    border-bottom: none;
+  }
+  .lead-body {
+    flex-grow: 1;
+  }
+  .lead-name {
+    padding-left: 10px;
+    min-width: 100px;
+  }
+  .lead-name h3 {
+    font-size: 13px;
+    margin-bottom: 0px;
+  }
+  .lead-name p {
+    font-size: 13px;
+    font-weight: lighter;
+    opacity: 0.6;
+    margin-top: 5px;
+  }
+  .lead-body {
+    padding-left: 10px;
+    font-size: 13px;
+    color: rgba(0,0,0,0.7);
+  }
+  .lead-body {
+    padding-left: 20px;
+    padding-right: 10px;
+    color: rgba(0,0,0,0.4);
+  }
+  .lead-body strong{
+    color: rgba(0,0,0,0.9);
+    color: rgba(0,0,0,0.9);
+  }
+  .lead-body p {
+    margin: 6px 0;
+  }
+  .lead-status {
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  .links {
+    font-size: 14px;
+    padding-right: 10px;
+  }
+
+  .status.accepted {
+    color: #04A366;
+  }
+  .status.declined {
+    color: red;
+  }
+  .status.pending {
+    color: lightgrey;
   }
 </style>
