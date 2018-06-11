@@ -8,6 +8,17 @@
         </div>
       <% @leads.each do |l| %>
         <div class="lead">
+          <div class="lead-status">
+            <% if l.status == "New" %>
+              <p class="strip status new"><%= l.status %></p>
+            <% elsif l.status == "Contacted" %>
+              <p class="strip status contacted"><%= l.status %></p>
+            <% elsif l.status == "Converted" %>
+              <p class="strip status converted"><%= l.status %></p>
+            <% elsif l.status == "Rejected" %>
+              <p class="strip status rejected"><%= l.status %></p>
+            <% end %>
+          </div>
           <div class="lead-name">
             <h3><%= link_to l.name, l %></h3>
             <p><%= l.created_at.strftime("%a, %b %d %y") %></p>
@@ -21,10 +32,6 @@
               <%= link_to "Reject", lead_path(l), method: :delete, data: { confirm: "Are You Sure?"} %>|
               <%= link_to "Delete!", lead_path(l), method: :delete, data: { confirm: "Are You Sure?"} %></p>
           </div>
-          <!-- <div class="lead-status">
-            <p class="status pending"></p>
-            <p class="price"></p>
-          </div> -->
         </div>
       <% end %>
       </div>
@@ -35,6 +42,18 @@
 
 
 <style>
+  .strip {
+    color: #777777;
+    float: left;
+    font-size: 11px;
+    margin: 0px 6px 0px 0px;
+    padding: 1px 4px 1px 3px;
+    text-align: right;
+    width: 75px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+
   .lead-header {
     display: flex;
     justify-content: space-between;
@@ -59,17 +78,18 @@
   }
 
   .lead {
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid rgba(220,224,244,0.4);
-  margin:0;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(220,224,244,0.4);
+    margin:0;
+
   }
 
   .lead:last-child {
     border-bottom: none;
   }
   .lead-body {
-    flex-grow: 1;
+    /*flex-grow: 1;*/
   }
   .lead-name {
     padding-left: 10px;
@@ -86,23 +106,23 @@
     margin-top: 5px;
   }
   .lead-body {
-    padding-left: 10px;
     font-size: 13px;
     color: rgba(0,0,0,0.7);
-  }
-  .lead-body {
     padding-left: 20px;
     padding-right: 10px;
-    color: rgba(0,0,0,0.4);
+    width:60%;
   }
+
   .lead-body strong{
     color: rgba(0,0,0,0.9);
     color: rgba(0,0,0,0.9);
   }
   .lead-body p {
     margin: 6px 0;
+    color: rgba(0,0,0,0.4);
   }
   .lead-status {
+    padding-left: 10px;
     font-weight: bold;
     font-size: 14px;
   }
@@ -110,15 +130,43 @@
   .links {
     font-size: 14px;
     padding-right: 10px;
+    padding-left: 20px;
   }
 
-  .status.accepted {
-    color: #04A366;
+  .status.contacted {
+    background: #22E0D1;
   }
-  .status.declined {
-    color: red;
+
+  .status.converted {
+    background: #00FE52;
   }
-  .status.pending {
-    color: lightgrey;
+
+  .status.rejected {
+    background: #ff2622;
+    color: gainsboro;
   }
+
+  .status.new {
+    background: gainsboro;
+  }
+
+  @media all and (max-width: 500px) {
+    .lead {
+      /* On small screens, we are no longer using row direction but column */
+      flex-direction: column;
+      padding:5px;
+      text-align: center;
+    }
+  }
+
+  /*@media(max-width:500px) {
+    .lead-body {
+      width:100%;
+      font-size: 13px;
+      color: rgba(0,0,0,0.7);
+      padding-left: 20px;
+      padding-right: 10px;
+    }
+  }*/
+
 </style>
