@@ -67,6 +67,17 @@ class LeadsController < ApplicationController
     end
   end
 
+  def convert_lead
+    @lead = Lead.find(params[:id])
+    @lead.status = "Converted"
+    @lead.save
+    @contact = Contact.new(name: @lead.name, company: @lead.company, email: @lead.email, phone: @lead.phone, lead_id: @lead.id)
+    if @contact.save
+      redirect_to leads_path
+      flash[:notice] = "Lead was successfully converted"
+    end
+  end
+
   def please_wait
   end
 
