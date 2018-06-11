@@ -28,7 +28,7 @@
             <p> <b>Message: </b> <%= l.message %></p>
           </div>
           <div class="links">
-            <p><%= link_to "Edit", lead_path(l) %>| <%= link_to "Convert", lead_path(l) %>|
+            <p><%= link_to "Edit", lead_path(l) %>| <%= link_to "Convert", convert_path(l) %>|
               <%= link_to "Reject", lead_path(l), method: :delete, data: { confirm: "Are You Sure?"} %>|
               <%= link_to "Delete!", lead_path(l), method: :delete, data: { confirm: "Are You Sure?"} %></p>
           </div>
