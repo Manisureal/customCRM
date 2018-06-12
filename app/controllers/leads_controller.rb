@@ -1,7 +1,11 @@
 class LeadsController < ApplicationController
   def index
     # @leads = Lead.all
-    @leads = Lead.order(:id).page(params[:page]).per(9)
+    @leads = if params[:lead]
+      Lead.where('name LIKE ?', "%#{params[:lead]}%").page(params[:page]).per(9)
+    else
+      Lead.order(:id).page(params[:page]).per(9)
+    end
   end
 
   def show
@@ -83,7 +87,7 @@ class LeadsController < ApplicationController
 
   private
   def lead_params
-    params.require(:lead).permit(:name, :company, :email, :phone, :message, :status, notes_attributes: [:content])
+    params.require(:lead).permit(:name, :company, :email, :phone, :message, :status, :lead, notes_attributes: [:content])
   end
 
   def status_update

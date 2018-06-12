@@ -5,6 +5,10 @@
         <div class="lead-header">
           <h5><b>Leads</b></h5>
           <p><%= link_to "Create Lead", new_lead_path %></p>
+          <%= form_tag(leads_path, method: :get) do %>
+            <%= text_field_tag :lead, params[:lead] %>
+            <%= submit_tag 'Search' %>
+          <% end %>
         </div>
       <% @leads.each do |l| %>
         <div class="lead">
