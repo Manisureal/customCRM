@@ -1,13 +1,26 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-3">
+      <div class="filters">
+        <p class="filter-head">Lead Statuses</p>
+        <%= form_tag(leads_path, method: :get) do %>
+          <% @status.each do |s| %>
+            <p class="filter-body">
+              <%= check_box_tag :lead, s %> <%= s %> <%= @leads.where(status: s).count %>
+            </p>
+            <% end %>
+            <%= submit_tag 'Search', name: nil %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-xs-9">
       <div class="bg-color">
         <div class="lead-header">
           <h5><b>Leads</b></h5>
           <p><%= link_to "Create Lead", new_lead_path %></p>
           <%= form_tag(leads_path, method: :get) do %>
             <%= text_field_tag :lead, params[:lead] %>
-            <%= submit_tag 'Search' %>
+            <%= submit_tag 'Search', name: nil %>
           <% end %>
         </div>
       <% @leads.each do |l| %>
@@ -46,6 +59,29 @@
 
 
 <style>
+  .filters {
+    background: white;
+    margin: 10px 0px 12px 0px;
+    padding: 6px 8px 6px 8px;
+    font-size: 11px;
+    color:#3f3f3f;
+  }
+
+  .filter-head {
+    border-bottom: 1px grey solid;
+    /*color: navy;*/
+    font-size: 12px;
+    font-weight: bold;
+    margin: 4px 0px 5px 0px;
+    padding: 2px 0px 2px 0px;
+    color:#3f3f3f;
+  }
+
+  .filter-body {
+    font-size: 11px;
+    border-bottom: 1px silver dotted;
+  }
+
   .strip {
     color: #777777;
     float: left;
