@@ -2,10 +2,13 @@ class LeadsController < ApplicationController
   def index
     # @leads = Lead.all
     @leads = if params[:lead]
-      Lead.where('name LIKE ?', "%#{params[:lead]}%").page(params[:page]).per(9)
+      sql_query = "name ILIKE :lead OR status ILIKE :lead"
+      # Lead.where('name LIKE ?', "%#{params[:lead]}%").page(params[:page]).per(9)
+      Lead.where(sql_query, lead: "%#{params[:lead]}%").page(params[:page]).per(9)
     else
       Lead.order(:id).page(params[:page]).per(9)
     end
+    @status = ["New","Contacted","Converted","Rejected"]
   end
 
   def show
