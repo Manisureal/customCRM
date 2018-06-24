@@ -6,9 +6,9 @@
         <%= form_tag(leads_path, method: :get) do %>
           <% @status.each do |s| %>
             <p class="filter-body">
-              <%= check_box_tag :lead, s %> <%= s %> <%= @leads.where(status: s).count %>
+              <%= check_box_tag("status[]", s) %> <%= s %> <%= Lead.lead_status(s) %>
             </p>
-            <% end %>
+          <% end %>
             <%= submit_tag 'Search', name: nil %>
         <% end %>
       </div>

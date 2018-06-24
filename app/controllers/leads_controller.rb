@@ -5,6 +5,8 @@ class LeadsController < ApplicationController
       sql_query = "name ILIKE :lead OR status ILIKE :lead"
       # Lead.where('name LIKE ?', "%#{params[:lead]}%").page(params[:page]).per(9)
       Lead.where(sql_query, lead: "%#{params[:lead]}%").page(params[:page]).per(9)
+    elsif params[:status]
+      @leads_status = Lead.where("status IN (?)", params[:status])#.where(["status LIKE ?", "%#{params[:status]}%"])
     else
       Lead.order(:id).page(params[:page]).per(9)
     end
