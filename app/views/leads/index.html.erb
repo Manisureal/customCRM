@@ -5,10 +5,15 @@
         <p class="filter-head">Lead Statuses</p>
         <%= form_tag(leads_path, method: :get) do %>
           <% @status.each do |s| %>
-            <p class="filter-body">
-              <%= check_box_tag("status[]", s) %> <%= s %> <%= Lead.lead_status(s) %>
-            </p>
+          <div class="filter-body">
+            <p><%= check_box_tag("status[]", s) %> <%= s == "" ? "Other" : s %></p>
+            <p><%= Lead.lead_status(s) %></p>
+          </div>
           <% end %>
+          <div class="filter-end">
+            <p>Total Leads</p>
+            <p><%= Lead.all.count %></p>
+          </div>
             <%= submit_tag 'Search', name: nil %>
         <% end %>
       </div>
@@ -65,6 +70,8 @@
     padding: 6px 8px 6px 8px;
     font-size: 11px;
     color:#3f3f3f;
+    box-shadow: rgb(187, 187, 187) 2px 2px 8px, rgb(187, 187, 187) -2px 0px 8px;
+    border-radius: 4px;
   }
 
   .filter-head {
@@ -80,6 +87,16 @@
   .filter-body {
     font-size: 11px;
     border-bottom: 1px silver dotted;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .filter-end {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 4px;
   }
 
   .strip {
@@ -115,6 +132,9 @@
   .bg-color {
     background-color: white;
     margin-top: 10px;
+    box-shadow: rgb(187, 187, 187) 2px 2px 8px, rgb(187, 187, 187) -2px 0px 8px;
+    border-radius: 4px;
+
   }
 
   .lead {
